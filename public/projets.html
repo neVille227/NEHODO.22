@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NEHODO.22 — Architecture, conception et visualisation architecturale.">
+  <meta name="theme-color" content="#0b0910">
+  <meta name="color-scheme" content="dark light">
+  <title>Catégories de plans — NEHODO.22</title>
+
+
+  <!-- Décide tout de suite si l'animation d'ouverture doit être jouée (une seule fois par visite) -->
+  <script>
+    (function () {
+      try { if (localStorage.getItem('nehodo-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+      try { var L = localStorage.getItem('nehodo-lang'); if (L) { document.documentElement.lang = L; document.documentElement.dir = L === 'ar' ? 'rtl' : 'ltr'; } } catch (e) {}
+    })();
+    (function () {
+      var skip = false, arriving = false;
+      try { skip = sessionStorage.getItem('nehodo-intro') === '1'; arriving = sessionStorage.getItem('nehodo-arrive') === '1'; sessionStorage.removeItem('nehodo-arrive'); } catch (e) {}
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { skip = true; arriving = false; }
+      if (arriving) skip = true;
+      try { if (localStorage.getItem('nehodo-lite') === '1') { skip = true; arriving = false; } } catch (e) {}
+      var c = document.documentElement.classList;
+      c.add(skip ? 'no-intro' : 'intro-playing');
+      if (arriving) c.add('page-arriving');
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="lite.js"></script>
+  <script src="i18n.js"></script>
+  <script src="config.js" defer></script>
+  <script src="plans-data.js" defer></script>
+  <script src="store.js" defer></script>
+  <script src="access.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="abo.js" defer></script>
+  <script src="protect.js" defer></script>
+  <script src="music.js" defer></script>
+  <script src="tuto.js" defer></script>
+  <script src="cursor.js" defer></script>
+  <noscript>
+    <style>
+      .intro { display: none !important; }
+      .hero-content > *, .hero-visual, .reveal { opacity: 1 !important; transform: none !important; }
+      html { overflow: auto !important; }
+    </style>
+  </noscript>
+</head>
+
+<body class="subpage">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="n-mark" viewBox="90 70 220 330">
+      <path d="M196 98 L228 84 L228 310 L196 310 Z" style="fill:var(--n1)"/>
+      <path d="M262 160 L292 148 L292 330 L262 330 Z" style="fill:var(--n2)"/>
+      <path d="M100 170 H140 V390 H100 Z" style="fill:var(--n3)"/>
+      <path d="M100 170 H150 L300 350 V390 H260 L100 205 Z" style="fill:var(--n4)"/>
+    </symbol>
+  </svg>
+
+  <!-- Transition entre les pages : fondu de fumée -->
+  <div class="page-transition" aria-hidden="true"><canvas class="pt-canvas"></canvas></div>
+
+  <header class="header">
+    <a class="logo" href="index.html" data-transition title="Retour à l'accueil" aria-label="NEHODO.22 : accueil">
+      <svg class="logo-mark" aria-hidden="true"><use href="#n-mark"/></svg>
+      <span class="logo-text">NEHODO<span>.22</span></span>
+    </a>
+
+    <button class="menu-toggle" aria-label="Ouvrir le menu"
+      aria-expanded="false" aria-controls="navigation">
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navigation" id="navigation">
+      <a href="index.html" data-transition>Accueil</a>
+      <a class="is-active" href="projets.html" data-transition>Catégories</a>
+      <a href="abonnements.html" data-transition>Abonnements</a>
+      <a href="personnalise.html" data-transition>Sur mesure</a>
+      <a href="idees.html" data-transition>Idées</a>
+      <a href="soutien.html" data-transition>Soutenir</a>
+      <a class="nav-contact" href="contact.html" data-transition>Me contacter ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="cat-hero" id="categories">
+      <p class="eyebrow">CATÉGORIES DE PLANS</p>
+      <h1>Choisis ta <span>catégorie.</span></h1>
+      <p class="cat-lead">Du plain-pied à l'immeuble en R+4, trois types de toiture pour chaque niveau. Et l'Atelier, en accès libre.</p>
+      <div class="cat-collage" id="cat-collage" hidden aria-label="Aperçu de plans"></div>
+    </section>
+
+    <div class="level-nav" aria-label="Aller à un niveau">
+      <div class="level-nav-inner"><a href="#rdc">RDC</a><a href="#r1">R+1</a><a href="#r2">R+2</a><a href="#r3">R+3</a><a href="#r4">R+4</a><a href="#atelier">Atelier</a></div>
+    </div>
+
+    <section class="level section reveal" id="rdc">
+      <div class="section-heading">
+        <p class="eyebrow">01 — RDC</p>
+        <span class="heading-mark">PLAIN-PIED</span>
+      </div>
+      <h2 class="section-title">RDC <span>rez-de-chaussée.</span></h2>
+      <div class="cat-grid">
+        <a class="cat-card" href="plans.html?niveau=rdc&amp;toiture=dalle" data-transition data-niveau="rdc" data-toiture="dalle">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="114" width="120" height="24"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="slab" x="33" y="108" width="134" height="6"/><path class="floor" d="M40 105 H160"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">RDC · 01</span>
+            <h3>Toiture dalle</h3>
+            <p>Terrasse accessible, lignes nettes et contemporaines.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=rdc&amp;toiture=charpente" data-transition data-niveau="rdc" data-toiture="charpente">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="114" width="120" height="24"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><polygon class="roof" points="32,114 100,76 168,114"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">RDC · 02</span>
+            <h3>Toiture charpente</h3>
+            <p>Toit incliné classique, charpente apparente ou habillée.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=rdc&amp;toiture=mixte" data-transition data-niveau="rdc" data-toiture="mixte">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="114" width="120" height="24"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="slab" x="33" y="108" width="70" height="6"/><polygon class="roof" points="100,114 136,80 168,114"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">RDC · 03</span>
+            <h3>Charpente mixte</h3>
+            <p>Une alliance de dalle et de charpente pour varier les volumes.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="level section reveal" id="r1">
+      <div class="section-heading">
+        <p class="eyebrow">02 — R+1</p>
+        <span class="heading-mark">UN NIVEAU AU-DESSUS</span>
+      </div>
+      <h2 class="section-title">R+1 <span>un étage.</span></h2>
+      <div class="cat-grid">
+        <a class="cat-card" href="plans.html?niveau=r1&amp;toiture=dalle" data-transition data-niveau="r1" data-toiture="dalle">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="90" width="120" height="48"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><rect class="slab" x="33" y="84" width="134" height="6"/><path class="floor" d="M40 81 H160"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+1 · 01</span>
+            <h3>Toiture dalle</h3>
+            <p>Terrasse accessible, lignes nettes et contemporaines.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=r1&amp;toiture=charpente" data-transition data-niveau="r1" data-toiture="charpente">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="90" width="120" height="48"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><polygon class="roof" points="32,90 100,52 168,90"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+1 · 02</span>
+            <h3>Toiture charpente</h3>
+            <p>Toit incliné classique, charpente apparente ou habillée.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=r1&amp;toiture=mixte" data-transition data-niveau="r1" data-toiture="mixte">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="90" width="120" height="48"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><rect class="slab" x="33" y="84" width="70" height="6"/><polygon class="roof" points="100,90 136,56 168,90"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+1 · 03</span>
+            <h3>Charpente mixte</h3>
+            <p>Une alliance de dalle et de charpente pour varier les volumes.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="level section reveal" id="r2">
+      <div class="section-heading">
+        <p class="eyebrow">03 — R+2</p>
+        <span class="heading-mark">DEUX NIVEAUX AU-DESSUS</span>
+      </div>
+      <h2 class="section-title">R+2 <span>deux étages.</span></h2>
+      <div class="cat-grid">
+        <a class="cat-card" href="plans.html?niveau=r2&amp;toiture=dalle" data-transition data-niveau="r2" data-toiture="dalle">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="66" width="120" height="72"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><rect class="w" x="54" y="72.7" width="16" height="10.1"/><rect class="w" x="100" y="72.7" width="16" height="10.1"/><rect class="w" x="134" y="72.7" width="16" height="10.1"/><path class="floor" d="M40 90 H160"/><rect class="slab" x="33" y="60" width="134" height="6"/><path class="floor" d="M40 57 H160"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+2 · 01</span>
+            <h3>Toiture dalle</h3>
+            <p>Terrasse accessible, lignes nettes et contemporaines.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=r2&amp;toiture=charpente" data-transition data-niveau="r2" data-toiture="charpente">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="66" width="120" height="72"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><rect class="w" x="54" y="72.7" width="16" height="10.1"/><rect class="w" x="100" y="72.7" width="16" height="10.1"/><rect class="w" x="134" y="72.7" width="16" height="10.1"/><path class="floor" d="M40 90 H160"/><polygon class="roof" points="32,66 100,28 168,66"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+2 · 02</span>
+            <h3>Toiture charpente</h3>
+            <p>Toit incliné classique, charpente apparente ou habillée.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=r2&amp;toiture=mixte" data-transition data-niveau="r2" data-toiture="mixte">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="66" width="120" height="72"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><rect class="w" x="54" y="72.7" width="16" height="10.1"/><rect class="w" x="100" y="72.7" width="16" height="10.1"/><rect class="w" x="134" y="72.7" width="16" height="10.1"/><path class="floor" d="M40 90 H160"/><rect class="slab" x="33" y="60" width="70" height="6"/><polygon class="roof" points="100,66 136,32 168,66"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+2 · 03</span>
+            <h3>Charpente mixte</h3>
+            <p>Une alliance de dalle et de charpente pour varier les volumes.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="level section reveal" id="r3">
+      <div class="section-heading">
+        <p class="eyebrow">04 — R+3</p>
+        <span class="heading-mark">TROIS NIVEAUX AU-DESSUS</span>
+      </div>
+      <h2 class="section-title">R+3 <span>trois étages.</span></h2>
+      <div class="cat-grid">
+        <a class="cat-card" href="plans.html?niveau=r3&amp;toiture=dalle" data-transition data-niveau="r3" data-toiture="dalle">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="42" width="120" height="96"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><rect class="w" x="54" y="72.7" width="16" height="10.1"/><rect class="w" x="100" y="72.7" width="16" height="10.1"/><rect class="w" x="134" y="72.7" width="16" height="10.1"/><path class="floor" d="M40 90 H160"/><rect class="w" x="54" y="48.7" width="16" height="10.1"/><rect class="w" x="100" y="48.7" width="16" height="10.1"/><rect class="w" x="134" y="48.7" width="16" height="10.1"/><path class="floor" d="M40 66 H160"/><rect class="slab" x="33" y="36" width="134" height="6"/><path class="floor" d="M40 33 H160"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+3 · 01</span>
+            <h3>Toiture dalle</h3>
+            <p>Terrasse accessible, lignes nettes et contemporaines.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=r3&amp;toiture=charpente" data-transition data-niveau="r3" data-toiture="charpente">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="42" width="120" height="96"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><rect class="w" x="54" y="72.7" width="16" height="10.1"/><rect class="w" x="100" y="72.7" width="16" height="10.1"/><rect class="w" x="134" y="72.7" width="16" height="10.1"/><path class="floor" d="M40 90 H160"/><rect class="w" x="54" y="48.7" width="16" height="10.1"/><rect class="w" x="100" y="48.7" width="16" height="10.1"/><rect class="w" x="134" y="48.7" width="16" height="10.1"/><path class="floor" d="M40 66 H160"/><polygon class="roof" points="32,42 100,4 168,42"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+3 · 02</span>
+            <h3>Toiture charpente</h3>
+            <p>Toit incliné classique, charpente apparente ou habillée.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=r3&amp;toiture=mixte" data-transition data-niveau="r3" data-toiture="mixte">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="42" width="120" height="96"/><rect class="w" x="54" y="120.7" width="16" height="10.1"/><rect class="door" x="100" y="119.3" width="12" height="18.7"/><rect class="w" x="134" y="120.7" width="16" height="10.1"/><rect class="w" x="54" y="96.7" width="16" height="10.1"/><rect class="w" x="100" y="96.7" width="16" height="10.1"/><rect class="w" x="134" y="96.7" width="16" height="10.1"/><path class="floor" d="M40 114 H160"/><rect class="w" x="54" y="72.7" width="16" height="10.1"/><rect class="w" x="100" y="72.7" width="16" height="10.1"/><rect class="w" x="134" y="72.7" width="16" height="10.1"/><path class="floor" d="M40 90 H160"/><rect class="w" x="54" y="48.7" width="16" height="10.1"/><rect class="w" x="100" y="48.7" width="16" height="10.1"/><rect class="w" x="134" y="48.7" width="16" height="10.1"/><path class="floor" d="M40 66 H160"/><rect class="slab" x="33" y="36" width="70" height="6"/><polygon class="roof" points="100,42 136,8 168,42"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+3 · 03</span>
+            <h3>Charpente mixte</h3>
+            <p>Une alliance de dalle et de charpente pour varier les volumes.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="level section reveal" id="r4">
+      <div class="section-heading">
+        <p class="eyebrow">05 — R+4</p>
+        <span class="heading-mark">QUATRE NIVEAUX AU-DESSUS</span>
+      </div>
+      <h2 class="section-title">R+4 <span>quatre étages.</span></h2>
+      <div class="cat-grid">
+        <a class="cat-card" href="plans.html?niveau=r4&amp;toiture=dalle" data-transition data-niveau="r4" data-toiture="dalle">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="38" width="120" height="100"/><rect class="w" x="54" y="123.6" width="16" height="8.4"/><rect class="door" x="100" y="122.4" width="12" height="15.6"/><rect class="w" x="134" y="123.6" width="16" height="8.4"/><rect class="w" x="54" y="103.6" width="16" height="8.4"/><rect class="w" x="100" y="103.6" width="16" height="8.4"/><rect class="w" x="134" y="103.6" width="16" height="8.4"/><path class="floor" d="M40 118 H160"/><rect class="w" x="54" y="83.6" width="16" height="8.4"/><rect class="w" x="100" y="83.6" width="16" height="8.4"/><rect class="w" x="134" y="83.6" width="16" height="8.4"/><path class="floor" d="M40 98 H160"/><rect class="w" x="54" y="63.6" width="16" height="8.4"/><rect class="w" x="100" y="63.6" width="16" height="8.4"/><rect class="w" x="134" y="63.6" width="16" height="8.4"/><path class="floor" d="M40 78 H160"/><rect class="w" x="54" y="43.6" width="16" height="8.4"/><rect class="w" x="100" y="43.6" width="16" height="8.4"/><rect class="w" x="134" y="43.6" width="16" height="8.4"/><path class="floor" d="M40 58 H160"/><rect class="slab" x="33" y="32" width="134" height="6"/><path class="floor" d="M40 29 H160"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+4 · 01</span>
+            <h3>Toiture dalle</h3>
+            <p>Terrasse accessible, lignes nettes et contemporaines.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=r4&amp;toiture=charpente" data-transition data-niveau="r4" data-toiture="charpente">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="38" width="120" height="100"/><rect class="w" x="54" y="123.6" width="16" height="8.4"/><rect class="door" x="100" y="122.4" width="12" height="15.6"/><rect class="w" x="134" y="123.6" width="16" height="8.4"/><rect class="w" x="54" y="103.6" width="16" height="8.4"/><rect class="w" x="100" y="103.6" width="16" height="8.4"/><rect class="w" x="134" y="103.6" width="16" height="8.4"/><path class="floor" d="M40 118 H160"/><rect class="w" x="54" y="83.6" width="16" height="8.4"/><rect class="w" x="100" y="83.6" width="16" height="8.4"/><rect class="w" x="134" y="83.6" width="16" height="8.4"/><path class="floor" d="M40 98 H160"/><rect class="w" x="54" y="63.6" width="16" height="8.4"/><rect class="w" x="100" y="63.6" width="16" height="8.4"/><rect class="w" x="134" y="63.6" width="16" height="8.4"/><path class="floor" d="M40 78 H160"/><rect class="w" x="54" y="43.6" width="16" height="8.4"/><rect class="w" x="100" y="43.6" width="16" height="8.4"/><rect class="w" x="134" y="43.6" width="16" height="8.4"/><path class="floor" d="M40 58 H160"/><polygon class="roof" points="32,38 100,0 168,38"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+4 · 02</span>
+            <h3>Toiture charpente</h3>
+            <p>Toit incliné classique, charpente apparente ou habillée.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=r4&amp;toiture=mixte" data-transition data-niveau="r4" data-toiture="mixte">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="40" y="38" width="120" height="100"/><rect class="w" x="54" y="123.6" width="16" height="8.4"/><rect class="door" x="100" y="122.4" width="12" height="15.6"/><rect class="w" x="134" y="123.6" width="16" height="8.4"/><rect class="w" x="54" y="103.6" width="16" height="8.4"/><rect class="w" x="100" y="103.6" width="16" height="8.4"/><rect class="w" x="134" y="103.6" width="16" height="8.4"/><path class="floor" d="M40 118 H160"/><rect class="w" x="54" y="83.6" width="16" height="8.4"/><rect class="w" x="100" y="83.6" width="16" height="8.4"/><rect class="w" x="134" y="83.6" width="16" height="8.4"/><path class="floor" d="M40 98 H160"/><rect class="w" x="54" y="63.6" width="16" height="8.4"/><rect class="w" x="100" y="63.6" width="16" height="8.4"/><rect class="w" x="134" y="63.6" width="16" height="8.4"/><path class="floor" d="M40 78 H160"/><rect class="w" x="54" y="43.6" width="16" height="8.4"/><rect class="w" x="100" y="43.6" width="16" height="8.4"/><rect class="w" x="134" y="43.6" width="16" height="8.4"/><path class="floor" d="M40 58 H160"/><rect class="slab" x="33" y="32" width="70" height="6"/><polygon class="roof" points="100,38 136,4 168,38"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">R+4 · 03</span>
+            <h3>Charpente mixte</h3>
+            <p>Une alliance de dalle et de charpente pour varier les volumes.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+      </div>
+    </section>
+    <section class="level section reveal" id="atelier">
+      <div class="section-heading">
+        <p class="eyebrow">06 — ATELIER</p>
+        <span class="heading-mark">CRÉATIONS LIBRES</span>
+      </div>
+      <h2 class="section-title">L’Atelier <span>en accès libre.</span></h2>
+      <p class="cat-lead">Terrasses, cuisines, garages, engins et autres créations : toutes mes réalisations, gratuites pour tout le monde.</p>
+      <div class="cat-grid">
+        <a class="cat-card" href="plans.html?niveau=atelier&amp;toiture=terrasse" data-transition data-niveau="atelier" data-toiture="terrasse">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect class="slab" x="30" y="118" width="140" height="8"/><path d="M42 118V84M158 118V84M36 84H164"/><path class="floor" d="M52 84V70M80 84V70M108 84V70M136 84V70"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">ATELIER · 01</span>
+            <h3>Terrasses</h3>
+            <p>Terrasses couvertes, pergolas et espaces de détente.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=atelier&amp;toiture=cuisine" data-transition data-niveau="atelier" data-toiture="cuisine">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="34" y="96" width="132" height="42"/><rect class="w" x="46" y="68" width="40" height="18"/><rect class="w" x="96" y="68" width="40" height="18"/><circle cx="62" cy="116" r="6"/><circle cx="86" cy="116" r="6"/><path class="floor" d="M110 108H156"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">ATELIER · 02</span>
+            <h3>Cuisines</h3>
+            <p>Cuisines équipées : implantation, meubles et circulation.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=atelier&amp;toiture=garage" data-transition data-niveau="atelier" data-toiture="garage">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="34" y="84" width="132" height="54"/><polygon class="roof" points="28,84 100,56 172,84"/><rect class="door" x="58" y="102" width="84" height="36"/><path class="floor" d="M58 114H142M58 126H142"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">ATELIER · 03</span>
+            <h3>Garages</h3>
+            <p>Garages simples ou doubles, abris et ateliers.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=atelier&amp;toiture=engins" data-transition data-niveau="atelier" data-toiture="engins">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="38" y="104" width="56" height="26"/><rect class="w" x="46" y="92" width="26" height="12"/><circle cx="52" cy="132" r="9"/><circle cx="82" cy="132" r="9"/><path d="M94 112H132L150 84M132 112V132"/><path class="floor" d="M150 84L168 100"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">ATELIER · 04</span>
+            <h3>Engins et matériel</h3>
+            <p>Aires de stationnement d’engins, hangars et dépôts de matériel.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+        <a class="cat-card" href="plans.html?niveau=atelier&amp;toiture=divers" data-transition data-niveau="atelier" data-toiture="divers">
+          <div class="cat-art-wrap"><svg class="cat-art" viewBox="0 0 200 150" aria-hidden="true"><path class="ground" d="M10 138H190"/><rect x="36" y="100" width="128" height="38"/><path class="floor" d="M52 100V84M76 100V84M100 100V84M124 100V84M148 100V84"/><path d="M36 84H164"/></svg></div>
+          <div class="cat-info">
+            <span class="cat-tag">ATELIER · 05</span>
+            <h3>Autres créations</h3>
+            <p>Portails, clôtures, piscines, mobilier et idées en tout genre.</p>
+          </div>
+          <span class="cat-soon">Bientôt</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <a class="logo" href="index.html" data-transition aria-label="NEHODO.22, retour à l'accueil">
+      <svg class="logo-mark" aria-hidden="true"><use href="#n-mark"/></svg>
+      <span class="logo-text">NEHODO<span>.22</span></span>
+    </a>
+    <p>Architecture · Créativité · Précision</p>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a href="projets.html" data-transition>Catégories</a>
+      <a href="abonnements.html" data-transition>Abonnements</a>
+      <a href="personnalise.html" data-transition>Sur mesure</a>
+      <a href="idees.html" data-transition>Idées</a>
+      <a href="soutien.html" data-transition>Soutenir</a>
+      <a href="contact.html" data-transition>Me contacter</a>
+    </nav>
+    <span class="copyright">© <span id="year">2026</span> NEHODO.22</span>
+  </footer>
+  <script src="plans.js" defer></script>
+</body>
+</html>

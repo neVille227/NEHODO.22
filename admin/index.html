@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b0910">
+  <title>NEHODO.22admin — Tableau de bord</title>
+
+  <link rel="stylesheet" href="admin.css">
+  <script src="store.js" defer></script>
+  <script src="admin.js" defer></script>
+  <script src="suivi.js" defer></script>
+</head>
+
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="n-mark" viewBox="90 70 220 330">
+      <path d="M196 98 L228 84 L228 310 L196 310 Z" fill="#8B5CF6"/>
+      <path d="M262 160 L292 148 L292 330 L262 330 Z" fill="#6D28D9"/>
+      <path d="M100 170 H140 V390 H100 Z" fill="#5B21B6"/>
+      <path d="M100 170 H150 L300 350 V390 H260 L100 205 Z" fill="#C4B5FD"/>
+    </symbol>
+  </svg>
+
+  <!-- Connexion -->
+  <div class="gate" id="gate" hidden>
+    <div class="gate-card">
+      <div class="brand"><svg class="logo-mark" aria-hidden="true"><use href="#n-mark"/></svg><span>NEHODO<b>.22</b><i>admin</i></span></div>
+      <h1 id="gate-title">Connexion</h1>
+      <p class="lead" id="gate-lead">Entre ton mot de passe pour ouvrir le tableau de bord.</p>
+      <form class="form" id="gate-form" novalidate>
+        <label class="field"><span id="gate-label">Mot de passe</span><input id="gate-pass" type="password" autocomplete="current-password" required></label>
+        <label class="field" id="gate-confirm-row" hidden><span>Confirmer le mot de passe</span><input id="gate-pass2" type="password" autocomplete="new-password"></label>
+        <button class="btn btn-primary" type="submit" id="gate-btn">Se connecter</button>
+        <p class="status" id="gate-status" role="status"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Application -->
+  <div class="app" id="app" hidden>
+    <aside class="side">
+      <div class="brand"><svg class="logo-mark" aria-hidden="true"><use href="#n-mark"/></svg><span>NEHODO<b>.22</b><i>admin</i></span></div>
+      <nav class="side-nav" id="side-nav" aria-label="Sections">
+        <button type="button" class="is-on" data-tab="dash">Tableau de bord</button>
+        <button type="button" data-tab="suivi">Suivi <em class="nav-count" id="suivi-count" hidden></em></button>
+        <button type="button" data-tab="list">Mes plans</button>
+        <button type="button" data-tab="form">Ajouter / modifier</button>
+        <button type="button" data-tab="publish">Publication</button>
+        <button type="button" data-tab="settings">Réglages</button>
+      </nav>
+      <button type="button" class="side-logout" id="btn-logout">Se déconnecter</button>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <h1 id="view-title">Tableau de bord</h1>
+        <button type="button" class="btn btn-primary" id="btn-new">+ Nouveau plan</button>
+      </header>
+
+      <!-- Tableau de bord -->
+      <section data-view="dash">
+        <div class="banner" id="pub-banner" role="status"></div>
+        <div class="stats" id="stats"></div>
+        <div class="cards3">
+          <div class="card"><h2>Par niveau</h2><div class="bars" id="bars-level"></div></div>
+          <div class="card"><h2>Par toiture</h2><div class="bars" id="bars-roof"></div></div>
+          <div class="card"><h2>Par accès</h2><div class="bars" id="bars-acces"></div></div>
+        </div>
+        <div class="card">
+          <h2>Derniers plans modifiés</h2>
+          <ul class="recent" id="recent"></ul>
+          <p class="empty" id="recent-empty" hidden>Aucun plan pour le moment. Clique sur « Nouveau plan » pour commencer.</p>
+        </div>
+      </section>
+
+      <!-- Suivi -->
+      <section data-view="suivi" hidden>
+        <div class="stats stats4" id="suivi-stats"></div>
+        <div class="cards3 two">
+          <div class="card">
+            <h2>Coller un e-mail reçu</h2>
+            <p>Copie le message envoyé par le site (idée, proposition, plan sur mesure ou soutien) : il est classé tout seul.</p>
+            <textarea id="suivi-paste" rows="6" class="area" placeholder="DEMANDE DE PLAN SUR MESURE&#10;&#10;Nom : …&#10;Contact : …"></textarea>
+            <div class="actions"><button class="btn btn-primary" type="button" id="suivi-parse">Analyser et ajouter</button><p class="status" id="suivi-pstatus" role="status"></p></div>
+          </div>
+          <form class="card form" id="suivi-form" novalidate>
+            <h2>Ajouter à la main</h2>
+            <div class="row">
+              <label class="field"><span>Type</span><select name="type"><option value="commande">Commande / proposition</option><option value="idee">Idée</option><option value="soutien">Soutien financier</option></select></label>
+              <label class="field"><span>Montant ($)</span><input name="montant" type="number" min="0" step="1"></label>
+            </div>
+            <div class="row">
+              <label class="field"><span>Nom</span><input name="nom" type="text"></label>
+              <label class="field"><span>Contact</span><input name="contact" type="text"></label>
+            </div>
+            <label class="field"><span>Détail</span><input name="detail" type="text" placeholder="Ex. R+1 toiture dalle, 3 chambres"></label>
+            <div class="actions"><button class="btn btn-ghost" type="submit">Ajouter</button></div>
+          </form>
+        </div>
+        <div class="filters" id="suivi-filters"></div>
+        <div class="table-wrap"><table class="table" id="suivi-table"></table></div>
+        <p class="empty" id="suivi-empty" hidden>Rien à suivre pour le moment. Colle un e-mail reçu ou ajoute une ligne à la main.</p>
+        <div class="actions"><button class="btn btn-ghost" type="button" id="suivi-csv">Exporter en CSV</button></div>
+        <p class="hint note">Le site n'a pas de serveur : chaque demande t'arrive par e-mail. Cette page sert à les classer et à suivre leur avancement (données gardées dans ce navigateur).</p>
+      </section>
+
+      <!-- Liste -->
+      <section data-view="list" hidden>
+        <div class="table-wrap"><table class="table" id="admin-table"></table></div>
+        <p class="empty" id="admin-empty" hidden>Aucun plan pour le moment. Clique sur « Nouveau plan » pour commencer.</p>
+      </section>
+
+      <!-- Formulaire -->
+      <section data-view="form" hidden>
+        <form class="form plan-form" id="plan-form" novalidate>
+          <input type="hidden" name="id">
+          <h2 id="form-title">Nouveau plan</h2>
+          <label class="field"><span>Titre du plan</span><input name="titre" type="text" required placeholder="Ex. Villa Akoué"></label>
+          <div class="row three">
+            <label class="field"><span>Niveau</span><select name="niveau"><option value="rdc">RDC</option><option value="r1">R+1</option><option value="r2">R+2</option><option value="r3">R+3</option><option value="r4">R+4</option><option value="atelier">Atelier (gratuit)</option></select></label>
+            <label class="field"><span>Toiture</span><select name="toiture"><option value="dalle">Toiture dalle</option><option value="charpente">Toiture charpente</option><option value="mixte">Charpente mixte</option><option value="terrasse">Atelier · Terrasses</option><option value="cuisine">Atelier · Cuisines</option><option value="garage">Atelier · Garages</option><option value="engins">Atelier · Engins et matériel</option><option value="divers">Atelier · Autres créations</option></select></label>
+            <label class="field"><span>Accès</span><select name="acces"><option value="premium">Premium</option><option value="vip">VIP</option><option value="libre">Gratuit (Atelier)</option></select></label>
+          </div>
+          <div class="row four">
+            <label class="field"><span>Surface (m²)</span><input name="surface" type="number" min="0"></label>
+            <label class="field"><span>Chambres</span><input name="chambres" type="number" min="0"></label>
+            <label class="field"><span>Salles de bain</span><input name="sdb" type="number" min="0"></label>
+            <label class="field"><span>Terrain (ex. 15 × 25 m)</span><input name="terrain" type="text"></label>
+          </div>
+          <div class="row">
+            <label class="field"><span>Prix à l'unité ($, facultatif)</span><input name="prix" type="number" min="0" step="1"></label>
+            <label class="field"><span>Format du fichier modifiable (VIP)</span><input name="format" type="text" placeholder="DWG, Revit, SketchUp…"></label>
+            <label class="field"><span>Statut</span><select name="statut"><option value="publie">Publié</option><option value="brouillon">Brouillon (caché)</option></select></label>
+          </div>
+          <label class="field"><span>Description</span><textarea name="description" rows="3" placeholder="Quelques lignes sur le plan…"></textarea></label>
+
+          <h3>Les vues du plan</h3>
+          <p class="hint">Ajoute une image par vue (JPG ou PNG). Elles sont réduites automatiquement.</p>
+          <div class="views-grid" id="views-grid"></div>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="submit">Enregistrer le plan</button>
+            <button class="btn btn-ghost" type="button" id="btn-cancel">Annuler</button>
+            <p class="status" id="form-status" role="status"></p>
+          </div>
+        </form>
+      </section>
+
+      <!-- Publication -->
+      <section data-view="publish" hidden>
+        <div class="cards3">
+          <div class="card">
+            <h2>Publier sur le site</h2>
+            <p>Les plans sont enregistrés dans ce navigateur. Pour que les visiteurs les voient : exporte <code>plans-data.js</code>, puis remplace le fichier du même nom dans le dossier du site <code>NEHODO.22</code> avant de le mettre en ligne.</p>
+            <button class="btn btn-primary" type="button" id="btn-export">Exporter plans-data.js</button>
+          </div>
+          <div class="card">
+            <h2>Importer</h2>
+            <p>Recharge les plans d'un <code>plans-data.js</code> existant (celui du site) ou d'une sauvegarde <code>.json</code>. Cela remplace les plans actuels.</p>
+            <label class="btn btn-ghost file-btn">Choisir un fichier<input type="file" id="file-import" accept=".js,.json,application/json"></label>
+            <p class="status" id="import-status" role="status"></p>
+          </div>
+          <div class="card">
+            <h2>Tout effacer</h2>
+            <p>Supprime tous les plans de ce navigateur. Pense à exporter avant.</p>
+            <button class="btn btn-ghost danger" type="button" id="btn-wipe">Effacer les plans</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Réglages -->
+      <section data-view="settings" hidden>
+        <form class="form narrow" id="pass-form" novalidate>
+          <h2>Changer le mot de passe</h2>
+          <label class="field"><span>Mot de passe actuel</span><input name="old" type="password" autocomplete="current-password"></label>
+          <label class="field"><span>Nouveau mot de passe</span><input name="new" type="password" autocomplete="new-password"></label>
+          <div class="actions"><button class="btn btn-primary" type="submit">Mettre à jour</button><p class="status" id="pass-status" role="status"></p></div>
+        </form>
+        <form class="form narrow" id="owner-form" novalidate style="margin-top:2.4rem">
+          <h2>Accès propriétaire sur le site</h2>
+          <p class="hint">Pour que l'essai de 72 h, le verrouillage « une seule ouverture » et les cadenas ne s'appliquent pas à toi sur le site public. Le site n'a aucun bouton ni lien vers l'admin : tu t'y reconnais avec une phrase secrète.</p>
+          <label class="field"><span>Phrase secrète (à garder pour toi)</span><input name="phrase" type="text" autocomplete="off" placeholder="ex. mon-code-secret-2026"></label>
+          <div class="actions"><button class="btn btn-primary" type="submit">Générer</button></div>
+          <div id="owner-out" hidden>
+            <p class="hint"><b>1.</b> Dans <code>config.js</code> du site public, mets cette ligne :</p>
+            <p><code id="owner-line" style="user-select:all;word-break:break-all"></code></p>
+            <p class="hint"><b>2.</b> Sur chaque appareil où tu veux l'accès total, ouvre une fois le site avec <code id="owner-url" style="user-select:all"></code> (par exemple <code>index.html#owner=ta-phrase</code>). Une pastille « Mode propriétaire » apparaît ; tu peux la fermer pour revoir le site comme un visiteur.</p>
+          </div>
+        </form>
+        <p class="hint note">Ce mot de passe protège l'accès depuis ce navigateur uniquement. Pour un espace réellement privé une fois en ligne, protège aussi le dossier <code>NEHODO.22admin</code> chez ton hébergeur (mot de passe du dossier ou accès restreint) et ne le relie à aucune page du site public.</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

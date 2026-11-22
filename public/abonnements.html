@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NEHODO.22 — Architecture, conception et visualisation architecturale.">
+  <meta name="theme-color" content="#0b0910">
+  <meta name="color-scheme" content="dark light">
+  <title>Abonnements — NEHODO.22</title>
+
+
+  <!-- Décide tout de suite si l'animation d'ouverture doit être jouée (une seule fois par visite) -->
+  <script>
+    (function () {
+      try { if (localStorage.getItem('nehodo-theme') === 'light') document.documentElement.setAttribute('data-theme', 'light'); } catch (e) {}
+      try { var L = localStorage.getItem('nehodo-lang'); if (L) { document.documentElement.lang = L; document.documentElement.dir = L === 'ar' ? 'rtl' : 'ltr'; } } catch (e) {}
+    })();
+    (function () {
+      var skip = false, arriving = false;
+      try { skip = sessionStorage.getItem('nehodo-intro') === '1'; arriving = sessionStorage.getItem('nehodo-arrive') === '1'; sessionStorage.removeItem('nehodo-arrive'); } catch (e) {}
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { skip = true; arriving = false; }
+      if (arriving) skip = true;
+      try { if (localStorage.getItem('nehodo-lite') === '1') { skip = true; arriving = false; } } catch (e) {}
+      var c = document.documentElement.classList;
+      c.add(skip ? 'no-intro' : 'intro-playing');
+      if (arriving) c.add('page-arriving');
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="lite.js"></script>
+  <script src="i18n.js"></script>
+  <script src="config.js" defer></script>
+  <script src="plans-data.js" defer></script>
+  <script src="store.js" defer></script>
+  <script src="access.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="abo.js" defer></script>
+  <script src="protect.js" defer></script>
+  <script src="music.js" defer></script>
+  <script src="tuto.js" defer></script>
+  <script src="cursor.js" defer></script>
+  <noscript>
+    <style>
+      .intro { display: none !important; }
+      .hero-content > *, .hero-visual, .reveal { opacity: 1 !important; transform: none !important; }
+      html { overflow: auto !important; }
+    </style>
+  </noscript>
+</head>
+
+<body class="subpage">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="n-mark" viewBox="90 70 220 330">
+      <path d="M196 98 L228 84 L228 310 L196 310 Z" style="fill:var(--n1)"/>
+      <path d="M262 160 L292 148 L292 330 L262 330 Z" style="fill:var(--n2)"/>
+      <path d="M100 170 H140 V390 H100 Z" style="fill:var(--n3)"/>
+      <path d="M100 170 H150 L300 350 V390 H260 L100 205 Z" style="fill:var(--n4)"/>
+    </symbol>
+  </svg>
+
+  <!-- Transition entre les pages : fondu de fumée -->
+  <div class="page-transition" aria-hidden="true"><canvas class="pt-canvas"></canvas></div>
+
+  <header class="header">
+    <a class="logo" href="index.html" data-transition title="Retour à l'accueil" aria-label="NEHODO.22 : accueil">
+      <svg class="logo-mark" aria-hidden="true"><use href="#n-mark"/></svg>
+      <span class="logo-text">NEHODO<span>.22</span></span>
+    </a>
+
+    <button class="menu-toggle" aria-label="Ouvrir le menu"
+      aria-expanded="false" aria-controls="navigation">
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navigation" id="navigation">
+      <a href="index.html" data-transition>Accueil</a>
+      <a href="projets.html" data-transition>Catégories</a>
+      <a class="is-active" href="abonnements.html" data-transition>Abonnements</a>
+      <a href="personnalise.html" data-transition>Sur mesure</a>
+      <a href="idees.html" data-transition>Idées</a>
+      <a href="soutien.html" data-transition>Soutenir</a>
+      <a class="nav-contact" href="contact.html" data-transition>Me contacter ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="cat-hero">
+      <p class="eyebrow">ABONNEMENTS</p>
+      <h1>Une formule pour <span>chaque projet.</span></h1>
+      <p class="cat-lead">Deux formules, c'est tout : Premium pour construire, VIP pour aller plus loin.</p>
+      <p class="trial-pill"><i></i> Essai gratuit 72 h sur Premium et VIP · chaque fichier ne s'ouvre qu'une fois</p>
+    </section>
+
+    <section class="section sub-section"><div class="sub-status" id="sub-status" role="status"></div></section>
+
+    <section class="section tiers-section">
+      <div class="tiers">
+        <article class="tier tier-featured">
+          <span class="tier-badge">Le plus choisi</span>
+          <h3>Premium</h3>
+          <p class="tier-sub">Pour construire</p>
+          <p class="tier-price"><strong>5,13 $</strong><span> / mois</span></p>
+          <ul class="tier-list"><li>Essai gratuit 72 h</li><li>Tous les plans RDC, R+1 et R+2</li><li>Plan de masse, vue en plan, plan coté, plan aménagé, façades et perspective</li><li>Nouveaux plans chaque mois</li></ul>
+          <div class="tier-actions"><button class="button button-primary" type="button" data-trial="premium">Essayer 72 h gratuitement</button><button class="button button-ghost" type="button" data-subscribe="premium">S’abonner</button></div>
+          <p class="tier-fcfa" data-fcfa="premium"></p>
+          <p class="trial-msg" data-trial-msg="premium" hidden></p>
+        </article>
+        <article class="tier">
+          
+          <h3>VIP</h3>
+          <p class="tier-sub">Pour les professionnels</p>
+          <p class="tier-price"><strong>10,25 $</strong><span> / mois</span></p>
+          <ul class="tier-list"><li>Essai gratuit 72 h</li><li>Tous les plans, du RDC au R+4</li><li>Tout Premium, plus le dossier technique : plan d’électricité, plan de plomberie, coupes, plan de toiture et plan VRD</li><li>Animation de présentation intérieure (vidéo)</li><li>Fichier modifiable (format logiciel) après paiement du plan</li><li>Modification sur mesure sur demande</li><li>Demandes prioritaires</li></ul>
+          <div class="tier-actions"><button class="button button-ghost" type="button" data-trial="vip">Essayer 72 h gratuitement</button><button class="button button-ghost" type="button" data-subscribe="vip">S’abonner</button></div>
+          <p class="tier-fcfa" data-fcfa="vip"></p>
+          <p class="trial-msg" data-trial-msg="vip" hidden></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="contenu">
+      <div class="section-heading">
+        <p class="eyebrow">CE QUE TU REÇOIS</p>
+        <span class="heading-mark">12 VUES PAR PLAN</span>
+      </div>
+      <p class="hint">Selon ta formule, tu accèdes à tout ou partie des 12 vues d’un plan. Tu peux aussi acheter un plan seul : paiement unique, les 12 vues restent à toi.</p>
+      <div class="views-table">
+        <div class="vt-col"><h3>Premium</h3><ul><li>Plan de masse</li><li>Vue en plan</li><li>Plan coté</li><li>Plan aménagé</li><li>Façades</li><li>Perspective</li></ul></div>
+        <div class="vt-col vt-vip"><h3>VIP · en plus</h3><ul><li>Plan d’électricité</li><li>Plan de plomberie</li><li>Coupes</li><li>Plan de toiture</li><li>Plan VRD</li><li>Animation intérieure</li></ul></div>
+        <div class="vt-col"><h3>Atelier · gratuit</h3><ul><li>Terrasses</li><li>Cuisines</li><li>Garages</li><li>Engins et matériel</li><li>Autres créations</li></ul></div>
+      </div>
+    </section>
+
+    <section class="section pay-section reveal">
+      <div class="section-heading">
+        <p class="eyebrow">PAIEMENT</p>
+        <span class="heading-mark">FEDAPAY</span>
+      </div>
+      <div class="net-board">
+        <div class="net-col"><h3>Mobile Money · Bénin</h3><div class="net-chips"><b>MTN MoMo</b><b>Moov Money</b><b>Celtiis Cash</b></div></div>
+        <div class="net-col"><h3>Autres réseaux d’Afrique de l’Ouest</h3><div class="net-chips"><b>Orange Money</b><b>Wave</b><b>T-Money</b><b>Flooz</b></div></div>
+        <div class="net-col"><h3>Universel</h3><div class="net-chips"><b>Visa</b><b>Mastercard</b><b>PayPal*</b><b>Virement*</b></div></div>
+      </div>
+      <p class="hint">Les paiements en ligne passent par FedaPay, en FCFA. Les réseaux disponibles dépendent de ton pays. *PayPal et virement : écris-moi depuis <a class="text-link" href="contact.html" data-transition>Me contacter</a>.</p>
+    </section>
+
+    <section class="section faq-section reveal">
+      <div class="section-heading">
+        <p class="eyebrow">QUESTIONS</p>
+        <span class="heading-mark">FAQ</span>
+      </div>
+      <div class="faq">
+        <details><summary>Comment fonctionne l'essai gratuit de 72 h&nbsp;?</summary><p>Tu choisis Premium ou VIP et tu accèdes à toutes les pages et à tous les plans de la formule pendant 72 heures. Pour que l'essai reste équitable, chaque fichier ne peut être ouvert qu'une seule fois pendant ces 72 h, et il n'est pas téléchargeable. Si la formule ne te convient pas, tu t'arrêtes là, sans payer. L'essai est unique par appareil.</p></details>
+        <details><summary>Puis-je changer de formule&nbsp;?</summary><p>Oui, tu peux passer de Premium à VIP quand tu veux, et revenir en arrière à la fin de la période.</p></details>
+        <details><summary>Que reçoit un abonné VIP&nbsp;?</summary><p>Après paiement d'un plan (ou d'un projet), le VIP peut obtenir le fichier dans le format du logiciel (par exemple DWG, Revit ou SketchUp) pour y apporter ses modifications. Il peut aussi me contacter pour une modification sur mesure.</p></details>
+        <details><summary>Comment payer&nbsp;?</summary><p>Clique sur « S'abonner », renseigne ton nom et ton e-mail, puis choisis ton réseau (MTN, Moov, Celtiis, carte…) dans la fenêtre sécurisée FedaPay. Ton accès s'active dès que le paiement est confirmé.</p></details>
+        <details><summary>Combien de temps dure un abonnement&nbsp;?</summary><p>30 jours à partir du paiement. Il ne se renouvelle pas tout seul : tu peux le prolonger quand tu veux, les jours restants sont conservés.</p></details>
+        <details><summary>Mon paiement n'est pas pris en compte, que faire&nbsp;?</summary><p>Écris-moi depuis la page Me contacter avec la référence de ta transaction, je le vérifie.</p></details>
+        <details><summary>Que contient un plan&nbsp;?</summary><p>Un plan complet comprend jusqu’à 12 vues : plan de masse, vue en plan, plan coté, plan aménagé, plan d’électricité, plan de plomberie, coupes, façades, plan de toiture, plan VRD, perspective et animation de présentation intérieure. Premium ouvre le dossier de base, VIP ouvre tout.</p></details>
+        <details><summary>Puis-je acheter un plan sans abonnement&nbsp;?</summary><p>Oui. Chaque plan peut être acheté seul, par carte bancaire ou Mobile Money : paiement unique, les 12 vues restent à toi et sont téléchargeables.</p></details>
+        <details><summary>Qu’est-ce que l’Atelier&nbsp;?</summary><p>C’est ma catégorie libre : terrasses, cuisines, garages, engins et autres créations. Tout y est gratuit, sans abonnement.</p></details>
+        <details><summary>C’est quoi le mode léger&nbsp;?</summary><p>Un bouton ⚡ en bas à gauche qui coupe les animations, la fumée et le curseur animé. Utile sur un téléphone ou un ordinateur lent.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="logo" href="index.html" data-transition aria-label="NEHODO.22, retour à l'accueil">
+      <svg class="logo-mark" aria-hidden="true"><use href="#n-mark"/></svg>
+      <span class="logo-text">NEHODO<span>.22</span></span>
+    </a>
+    <p>Architecture · Créativité · Précision</p>
+    <nav class="footer-links" aria-label="Pied de page">
+      <a href="projets.html" data-transition>Catégories</a>
+      <a href="abonnements.html" data-transition>Abonnements</a>
+      <a href="personnalise.html" data-transition>Sur mesure</a>
+      <a href="idees.html" data-transition>Idées</a>
+      <a href="soutien.html" data-transition>Soutenir</a>
+      <a href="contact.html" data-transition>Me contacter</a>
+    </nav>
+    <span class="copyright">© <span id="year">2026</span> NEHODO.22</span>
+  </footer>
+  <script>
+    /* démarrage de l'essai de 72 h */
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('[data-trial]') : null;
+      if (!b || !window.NehodoAccess) return;
+      var tier = b.getAttribute('data-trial'), A = window.NehodoAccess, st = A.status();
+      var msg = document.querySelector('[data-trial-msg="' + tier + '"]');
+      function say(t, ok) { if (!msg) return; msg.hidden = false; msg.className = 'trial-msg ' + (ok ? 'is-ok' : 'is-err'); msg.textContent = t; }
+      if (st.owner) { say('Tu es propriétaire : accès total, pas besoin d\'essai.', true); return; }
+      if (st.active) { say('Ton essai est déjà en cours : ' + A.fmt(st.remaining) + ' restantes.', true); return; }
+      if (st.expired) { say('Tu as déjà utilisé ton essai gratuit sur cet appareil. Abonne-toi ci-dessus pour continuer.', false); return; }
+      A.startTrial(tier);
+      say('Essai ' + (tier === 'vip' ? 'VIP' : 'Premium') + ' lancé pour 72 h. Direction les catégories…', true);
+      setTimeout(function () { window.location.href = 'projets.html'; }, 1100);
+    });
+  </script>
+</body>
+</html>
